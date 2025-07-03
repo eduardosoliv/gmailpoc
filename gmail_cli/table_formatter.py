@@ -59,7 +59,9 @@ class EmailTableFormatter:
             date_text = gmail_client.format_date(email.get("date", ""))
 
             table.add_row(from_text, subject_text, date_text)
-            table.add_row("", "", "")
+            # Don't add empty row after the last email
+            if email != emails[-1]:
+                table.add_row("", "", "")
 
         # Display the table
         self.console.print(table)
