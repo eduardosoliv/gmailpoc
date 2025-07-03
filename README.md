@@ -75,10 +75,8 @@ Follow the authentication flow in your browser. The application will save the to
 poetry run gmail-cli
 ```
 
-This will display a formatted table with:
-- **From**: Sender's email address
-- **Subject**: Email subject line
-- **Date**: Date and time the email was received
+This will display a formatted table, example:
+![image](example_output.png)
 
 ### Command Line Options
 
