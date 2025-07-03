@@ -6,23 +6,18 @@ A command-line interface tool to access Gmail and list unread emails in a format
 
 - 🔐 Secure Gmail API authentication using OAuth 2.0
 - 📧 List unread emails with sender, subject, and date
-- 🎨 Beautiful CLI formatting using Rich library
-- ⚡ Fast and efficient email retrieval
+- 🎨 CLI formatting using Rich library
 - 🔧 Easy setup with Poetry
 
 ## Prerequisites
 
 - Python 3.9 or higher
 - Poetry (for dependency management)
-- Gmail account with API access enabled
+- Gmail account with API access (with OAuth) enabled
 
 ## Installation
 
-1. Clone this repository:
-```bash
-git clone <repository-url>
-cd gmailpoc
-```
+1. Clone this repository
 
 2. Install dependencies using Poetry:
 ```bash
@@ -75,7 +70,8 @@ Follow the authentication flow in your browser. The application will save the to
 poetry run gmail-cli
 ```
 
-This will display a formatted table, example:
+It will display a formatted table, example:
+
 ![image](example_output.png)
 
 ### Command Line Options
@@ -104,7 +100,7 @@ gmailpoc/
 
 - **google-api-python-client**: Gmail API client
 - **google-auth**: Google authentication
-- **rich**: Beautiful CLI formatting
+- **rich**: CLI formatting
 - **click**: CLI framework
 
 ## Development
