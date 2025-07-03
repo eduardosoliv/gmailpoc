@@ -125,6 +125,11 @@ poetry run pylint .
 poetry run flake8 .
 ```
 
+Or all at once:
+```bash
+poetry run black . ; poetry run pylint . ; poetry run flake8
+```
+
 ## Security Notes
 
 - Never commit `credentials.json` or `token.json` to version control
