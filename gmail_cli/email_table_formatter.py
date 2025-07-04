@@ -131,4 +131,5 @@ class EmailTableFormatter:  # pylint: disable=too-few-public-methods
             parsed_date = email.utils.parsedate_to_datetime(date_string)
             return parsed_date.strftime("%Y-%m-%d %H:%M")
         except Exception:
+            print(f"Error parsing date: {date_string}")
             return date_string
