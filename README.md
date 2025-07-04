@@ -24,9 +24,9 @@ A command-line interface tool to access Gmail and list unread emails in a format
 poetry install
 ```
 
-3. Test setup
+3. Check setup
 ```bash
-poetry run python test_setup.py
+poetry run python setup_check.py
 ```
 
 ## Gmail API Setup
