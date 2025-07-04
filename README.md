@@ -115,7 +115,7 @@ poetry install --with dev
 ### Run Tests
 
 ```bash
-poetry run pytest
+poetry run pytest -v
 ```
 
 Run coverage reporting:
