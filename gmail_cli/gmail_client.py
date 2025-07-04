@@ -110,6 +110,13 @@ class GmailClient:
         Returns:
             List of email dictionaries with 'from', 'subject', 'date' keys
         """
+
+        def _extract_header(headers: List[Dict], name: str) -> str:
+            for header in headers:
+                if header["name"] == name:
+                    return header["value"]
+            return ""
+
         if not self.service:
             print("Gmail service not initialized. Please authenticate first.")
             return []
@@ -149,9 +156,9 @@ class GmailClient:
 
                 headers = msg["payload"]["headers"]
                 email_data = {
-                    "from": self._extract_header(headers, "From"),
-                    "subject": self._extract_header(headers, "Subject"),
-                    "date": self._extract_header(headers, "Date"),
+                    "from": _extract_header(headers, "From"),
+                    "subject": _extract_header(headers, "Subject"),
+                    "date": _extract_header(headers, "Date"),
                 }
 
                 emails.append(email_data)
@@ -164,22 +171,6 @@ class GmailClient:
         except Exception as e:
             print(f"Error retrieving emails: {e}")
             return []
-
-    def _extract_header(self, headers: List[Dict], name: str) -> str:
-        """
-        Extract header value from email headers.
-
-        Args:
-            headers: List of header dictionaries
-            name: Header name to extract
-
-        Returns:
-            Header value or empty string if not found
-        """
-        for header in headers:
-            if header["name"] == name:
-                return header["value"]
-        return ""
 
     def format_date(self, date_string: str) -> str:
         """
