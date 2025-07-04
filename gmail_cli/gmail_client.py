@@ -49,7 +49,6 @@ class GmailClient:
                 creds = Credentials.from_authorized_user_file(
                     self.token_file, self.SCOPES
                 )
-            # pylint: disable=broad-exception-caught
             except Exception as e:
                 print(f"Error loading existing token: {e}")
                 creds = None
@@ -59,7 +58,6 @@ class GmailClient:
             if creds and creds.expired and creds.refresh_token:
                 try:
                     creds.refresh(Request())
-                # pylint: disable=broad-exception-caught
                 except Exception as e:
                     print(f"Error refreshing token: {e}")
                     creds = None
@@ -80,7 +78,6 @@ class GmailClient:
                         self.credentials_file, self.SCOPES
                     )
                     creds = flow.run_local_server(port=0)
-                # pylint: disable=broad-exception-caught
                 except Exception as e:
                     print(f"Error during authentication: {e}")
                     return False
@@ -89,7 +86,6 @@ class GmailClient:
             try:
                 with open(self.token_file, "w", encoding="utf-8") as token:
                     token.write(creds.to_json())
-            # pylint: disable=broad-exception-caught
             except Exception as e:
                 print(f"Error saving token: {e}")
                 return False
@@ -98,7 +94,6 @@ class GmailClient:
         try:
             self.service = build("gmail", "v1", credentials=creds)
             return True
-        # pylint: disable=broad-exception-caught
         except Exception as e:
             print(f"Error building Gmail service: {e}")
             return False
@@ -164,7 +159,6 @@ class GmailClient:
         except HttpError as error:
             print(f"Gmail API error: {error}")
             return []
-        # pylint: disable=broad-exception-caught
         except Exception as e:
             print(f"Error retrieving emails: {e}")
             return []
@@ -199,6 +193,6 @@ class GmailClient:
             # Parse the email date
             parsed_date = email.utils.parsedate_to_datetime(date_string)
             return parsed_date.strftime("%Y-%m-%d %H:%M")
-        except Exception:  # pylint: disable=broad-exception-caught
+        except Exception:
             # Return original string if parsing fails
             return date_string

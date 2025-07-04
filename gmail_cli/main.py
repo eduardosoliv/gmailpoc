@@ -63,7 +63,6 @@ def main(max_results: int, credentials: str, token: str):
 
         emails = gmail_client.get_unread_emails(max_results)
         formatter.display_emails(emails, max_results)
-    # pylint: disable=broad-exception-caught
     except Exception as e:
         formatter.show_error(f"An unexpected error occurred: {str(e)}")
         console.print(f"\n[dim]Error details: {type(e).__name__}: {e}[/dim]")

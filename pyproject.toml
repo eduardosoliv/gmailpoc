@@ -30,3 +30,6 @@ gmail-cli = "gmail_cli.main:main"
 
 [tool.black]
 line-length = 79
+
+[tool.pylint.messages_control]
+disable = ["broad-exception-caught"]
