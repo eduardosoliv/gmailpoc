@@ -2,11 +2,11 @@
 Table formatter for displaying Gmail emails in CLI.
 """
 
+import email.utils
 from typing import List, Dict
 from rich.console import Console
 from rich.table import Table
 from rich.panel import Panel
-from .gmail_client import GmailClient
 
 
 class EmailTableFormatter:
@@ -51,16 +51,14 @@ class EmailTableFormatter:
         table.add_column("Date", style="green", width=20, no_wrap=True)
 
         # Add rows
-        gmail_client = GmailClient()
-
-        for email in emails:
-            from_text = self._format_sender(email.get("from", ""))
-            subject_text = self._format_subject(email.get("subject", ""))
-            date_text = gmail_client.format_date(email.get("date", ""))
+        for _email in emails:
+            from_text = self._format_sender(_email.get("from", ""))
+            subject_text = self._format_subject(_email.get("subject", ""))
+            date_text = self._format_date(_email.get("date", ""))
 
             table.add_row(from_text, subject_text, date_text)
             # Don't add empty row after the last email
-            if email != emails[-1]:
+            if _email != emails[-1]:
                 table.add_row("", "", "")
 
         # Display the table
@@ -92,11 +90,11 @@ class EmailTableFormatter:
 
         # Extract name from "Name <email@domain.com>" format
         if "<" in sender and ">" in sender:
-            name = sender.split("<")[0].strip()
-            email = sender.split("<")[1].split(">")[0].strip()
-            if name:
-                return f"{name}\n[dim]{email}[/dim]"
-            return email
+            _name = sender.split("<")[0].strip()
+            _email = sender.split("<")[1].split(">")[0].strip()
+            if _name:
+                return f"{_name}\n[dim]{_email}[/dim]"
+            return _email
 
         return sender
 
@@ -118,6 +116,22 @@ class EmailTableFormatter:
             return subject[:82] + "..."
 
         return subject
+
+    def _format_date(self, date_string: str) -> str:
+        """
+        Format email date for display.
+
+        Args:
+            date_string: Raw date string from email
+
+        Returns:
+            Formatted date string or original string if parsing fails
+        """
+        try:
+            parsed_date = email.utils.parsedate_to_datetime(date_string)
+            return parsed_date.strftime("%Y-%m-%d %H:%M")
+        except Exception:
+            return date_string
 
     def show_error(self, message: str) -> None:
         """
