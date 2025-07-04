@@ -7,7 +7,7 @@ import click
 from rich.console import Console
 from rich.panel import Panel
 from .gmail_client import GmailClient
-from .table_formatter import EmailTableFormatter
+from .email_table_formatter import EmailTableFormatter
 from .message_utils import MessageUtils
 
 

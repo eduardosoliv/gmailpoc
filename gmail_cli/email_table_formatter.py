@@ -9,7 +9,7 @@ from rich.table import Table
 from rich.panel import Panel
 
 
-class EmailTableFormatter:
+class EmailTableFormatter:  # pylint: disable=too-few-public-methods
     """Formatter for displaying emails in a rich CLI table."""
 
     def __init__(self):

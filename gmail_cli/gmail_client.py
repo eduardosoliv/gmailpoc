@@ -3,7 +3,6 @@ Gmail API client for accessing unread emails.
 """
 
 import os
-import email.utils
 from typing import List, Dict, Optional
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
@@ -171,19 +170,3 @@ class GmailClient:
         except Exception as e:
             print(f"Error retrieving emails: {e}")
             return []
-
-    def format_date(self, date_string: str) -> str:
-        """
-        Format email date for display.
-
-        Args:
-            date_string: Raw date string from email
-
-        Returns:
-            Formatted date string or original string if parsing fails
-        """
-        try:
-            parsed_date = email.utils.parsedate_to_datetime(date_string)
-            return parsed_date.strftime("%Y-%m-%d %H:%M")
-        except Exception:
-            return date_string

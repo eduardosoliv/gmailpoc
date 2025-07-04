@@ -34,16 +34,22 @@ def test_local_imports():
     """Test that local modules can be imported."""
     print("\nTesting local module imports...")
 
-    try:
-        # pylint: disable=redefined-outer-name,unused-import
-        # pylint: disable=import-outside-toplevel
-        from gmail_cli import gmail_client, table_formatter, main  # noqa: F401
+    required_local_modules = [
+        "gmail_cli.gmail_client",
+        "gmail_cli.email_table_formatter",
+        "gmail_cli.message_utils",
+        "gmail_cli.main",
+    ]
 
-        print("✅ gmail_cli package")
-        return True
-    except ImportError as e:
-        print(f"❌ gmail_cli package: {e}")
-        return False
+    for module in required_local_modules:
+        try:
+            importlib.import_module(module)
+            print(f"✅ {module}")
+        except ImportError as e:
+            print(f"❌ gmail_cli.{module}: {e}")
+            return False
+
+    return True
 
 
 def main():
