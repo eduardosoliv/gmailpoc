@@ -84,16 +84,17 @@ poetry run gmail-cli --help
 
 ```
 gmailpoc/
-├── pyproject.toml          # Poetry configuration
-├── README.md              # This file
-├── .gitignore             # Git ignore rules
-├── credentials.json       # Gmail API credentials (not in git)
-├── token.json            # OAuth token (not in git)
+├── pyproject.toml                # Poetry configuration
+├── README.md                     # This file
+├── .gitignore                    # Git ignore rules
+├── credentials.json              # Gmail API credentials (not versioned)
+├── token.json                    # OAuth token (not versioned)
 └── gmail_cli/
     ├── __init__.py
-    ├── main.py           # CLI entry point
-    ├── gmail_client.py   # Gmail API client
-    └── table_formatter.py # CLI table formatting
+    ├── main.py                   # CLI entry point
+    ├── gmail_client.py           # Gmail API client
+    ├── message_utils.py          # Display formatted messages in CLI
+    └── email_table_formatter.py  # CLI table formatting
 ```
 
 ## Dependencies
