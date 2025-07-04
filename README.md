@@ -118,6 +118,11 @@ poetry install --with dev
 poetry run pytest
 ```
 
+Run coverage reporting:
+```bash
+poetry run pytest --cov=gmail_cli
+```
+
 ### Code Formatting
 
 ```bash
