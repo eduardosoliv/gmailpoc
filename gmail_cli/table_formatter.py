@@ -132,36 +132,3 @@ class EmailTableFormatter:
             return parsed_date.strftime("%Y-%m-%d %H:%M")
         except Exception:
             return date_string
-
-    def show_error(self, message: str) -> None:
-        """
-        Display an error message.
-
-        Args:
-            message: Error message to display
-        """
-        self.console.print(
-            Panel(f"❌ {message}", style="red", border_style="red")
-        )
-
-    def show_success(self, message: str) -> None:
-        """
-        Display a success message.
-
-        Args:
-            message: Success message to display
-        """
-        self.console.print(
-            Panel(f"✅ {message}", style="green", border_style="green")
-        )
-
-    def show_info(self, message: str) -> None:
-        """
-        Display an info message.
-
-        Args:
-            message: Info message to display
-        """
-        self.console.print(
-            Panel(f"ℹ️  {message}", style="blue", border_style="blue")
-        )
