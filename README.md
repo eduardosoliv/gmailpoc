@@ -134,7 +134,7 @@ poetry run flake8 .
 
 Or all at once:
 ```bash
-poetry run black . ; poetry run pylint . ; poetry run flake8
+poetry run black . ; poetry run pylint . ; poetry run flake8 .
 ```
 
 ## Security Notes
