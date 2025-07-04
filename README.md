@@ -121,6 +121,7 @@ poetry run pytest -v
 Run coverage reporting:
 ```bash
 poetry run pytest --cov=gmail_cli
+poetry run pytest --cov=gmail_cli --cov-report html
 ```
 
 ### Code Formatting
