@@ -41,7 +41,6 @@ def main(max_results: int, credentials: str, token: str):
     console = Console()
     formatter = EmailTableFormatter()
 
-    # Show welcome message
     console.print(
         Panel(
             "[bold cyan]Gmail CLI[/bold cyan]\n"

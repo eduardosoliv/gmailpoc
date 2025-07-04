@@ -4,7 +4,7 @@ Gmail API client for accessing unread emails.
 
 import os
 import email.utils
-from typing import List, Dict
+from typing import List, Dict, Optional
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -15,7 +15,6 @@ from googleapiclient.errors import HttpError
 class GmailClient:
     """Client for interacting with Gmail API."""
 
-    # Gmail API scopes
     SCOPES = ["https://www.googleapis.com/auth/gmail.readonly"]
 
     def __init__(
@@ -43,15 +42,18 @@ class GmailClient:
         """
         creds = None
 
-        # Load existing token if available
-        if os.path.exists(self.token_file):
-            try:
-                creds = Credentials.from_authorized_user_file(
-                    self.token_file, self.SCOPES
-                )
-            except Exception as e:
-                print(f"Error loading existing token: {e}")
-                creds = None
+        def _load_existing_token() -> Optional[Credentials]:
+            if os.path.exists(self.token_file):
+                try:
+                    return Credentials.from_authorized_user_file(
+                        self.token_file, self.SCOPES
+                    )
+                except Exception as e:
+                    print(f"Error loading existing token: {e}")
+                    return None
+            return None
+
+        creds = _load_existing_token()
 
         # If no valid credentials available, let the user log in
         if not creds or not creds.valid:
@@ -187,12 +189,10 @@ class GmailClient:
             date_string: Raw date string from email
 
         Returns:
-            Formatted date string
+            Formatted date string or original string if parsing fails
         """
         try:
-            # Parse the email date
             parsed_date = email.utils.parsedate_to_datetime(date_string)
             return parsed_date.strftime("%Y-%m-%d %H:%M")
         except Exception:
-            # Return original string if parsing fails
             return date_string
