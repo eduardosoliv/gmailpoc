@@ -90,11 +90,11 @@ class EmailTableFormatter:  # pylint: disable=too-few-public-methods
 
         # Extract name from "Name <email@domain.com>" format
         if "<" in sender and ">" in sender:
-            _name = sender.split("<")[0].strip()
-            _email = sender.split("<")[1].split(">")[0].strip()
-            if _name:
-                return f"{_name}\n[dim]{_email}[/dim]"
-            return _email
+            name = sender.split("<")[0].strip()
+            email_address = sender.split("<")[1].split(">")[0].strip()
+            if name:
+                return f"{name}\n[dim]{email_address}[/dim]"
+            return email_address
 
         return sender
 

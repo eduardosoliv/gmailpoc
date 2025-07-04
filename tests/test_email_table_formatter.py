@@ -1,4 +1,5 @@
-# pylint: disable=missing-module-docstring,missing-class-docstring,missing-function-docstring
+# pylint: disable=missing-module-docstring
+# pylint: disable=missing-class-docstring,missing-function-docstring
 from unittest.mock import patch, MagicMock
 from gmail_cli.email_table_formatter import EmailTableFormatter
 
